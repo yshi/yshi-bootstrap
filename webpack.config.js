@@ -19,6 +19,9 @@ var config = {
   entry: {
     app: './src/index'
   },
+  devServer: {
+    disableHostCheck: true,
+  },
   output: {
     path: path.resolve('dist'),
     filename: '[name].js?[hash]',
@@ -34,16 +37,19 @@ var config = {
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.js' ],
+    extensions: ['.webpack.js', '.web.js', '.js' ],
   },
   module: {
-    preLoaders: [
+    /*
+    rules: [
       {
         test: /\.js$/,
-        loader: 'source-map-loader',
-        include: path.resolve('node_modules')
+        use: ['source-map-loader'],
+        enforce: "pre"
+        // include: path.resolve('node_modules')
       }
     ],
+    */
     loaders: [
       {
         test: /\.js$/,
@@ -78,6 +84,14 @@ var config = {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [
+          require('postcss-flexbugs-fixes'),
+          require('autoprefixer')({ browsers: autoprefixerBrowsers })
+        ]
+      }
+    }),
     new webpack.ProvidePlugin({
       'jQuery': 'jquery',         // for Bootstrap 3.x / 4.x
       'window.jQuery': 'jquery',  // for Bootstrap 3.x / 4.x
@@ -91,36 +105,7 @@ var config = {
     new FixDefaultImportPlugin(),
     new BellOnBundlerErrorPlugin()
   ],
-  tslint: {
-    emitErrors: true,
-    failOnHint: true
-  },
-  postcss: function () {
-    return [
-      require('postcss-flexbugs-fixes'),
-      require('autoprefixer')({ browsers: autoprefixerBrowsers })
-    ];
-  }
 };
-
-var vendorChunkPlugin =
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: function (module) {
-      var relPath = path.relative(__dirname, module.userRequest).replace(/\\/g, '/');
-      return /^(node_modules|src\/(bootstrap4?|semantic|foundation))\//.test(relPath);
-    }
-  });
-
-var cssLibChunkPlugin =
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'bootstrap',  // bootstrap | semantic | foundation
-    chunks: ['vendor'],
-    minChunks: function(module) {
-      var relPath = path.relative(__dirname, module.userRequest).replace(/\\/g, '/');
-      return /^((src|node_modules)\/(bootstrap4?|semantic|foundation))\//.test(relPath);
-    }
-  });
 
 var extractTextPlugin = new ExtractTextPlugin('[name].css?[hash]');
 
@@ -130,8 +115,6 @@ config.plugins.push(
     output: { comments: false }
   }),
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.optimize.DedupePlugin(),
-  vendorChunkPlugin,
   extractTextPlugin
 );
 
