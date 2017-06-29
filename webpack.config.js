@@ -102,6 +102,10 @@ var config = {
       filename: 'index.html',
       template: 'src/index.html'
     }),
+    new HtmlWebpackPlugin({
+      filename: 'layout.html',
+      template: 'src/layout.html'
+    }),
     new FixDefaultImportPlugin(),
     new BellOnBundlerErrorPlugin()
   ],
