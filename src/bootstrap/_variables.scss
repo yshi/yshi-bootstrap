@@ -94,7 +94,17 @@ $enable-flex: true;
 //
 // Grayscale and brand colors for use across Bootstrap.
 
+// YSHI Colourscheme
+$yshi-white: #f3f4ec !default;
+$yshi-black: #474e44 !default;
+$yshi-tan: #cccfbc !default;
+$yshi-tan-dark: #bab1b1 !default;
+$yshi-green: #87A284 !default;
+$yshi-yellow-light: #ebefd1 !default;
+$yshi-yellow-dark: #dadfb5 !default;
+
 // Start with assigning color names to specific hex values.
+// $white:  #fff !default;
 $white:  #fff !default;
 $black:  #000 !default;
 $red:    #d9534f !default;
@@ -114,12 +124,12 @@ $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
 // Reassign color vars to semantic color scheme
-$brand-primary:             $blue !default;
+$brand-primary:             $yshi-green !default;
 $brand-success:             $green !default;
 $brand-info:                $teal !default;
 $brand-warning:             $orange !default;
 $brand-danger:              $red !default;
-$brand-inverse:             $gray-dark !default;
+$brand-inverse:             $yshi-tan !default;
 
 
 // Options
@@ -184,10 +194,10 @@ $sizes: (
 //
 // Settings for the `<body>` element.
 
-$body-bg:       $white !default;
-$body-color:    $gray-dark !default;
-$inverse-bg:    $gray-dark !default;
-$inverse-color: $gray-lighter !default;
+$body-bg:       $yshi-white !default;
+$body-color:    $yshi-black !default;
+$inverse-bg:    $yshi-tan-dark !default;
+$inverse-color: $yshi-tan !default;
 
 
 // Links
