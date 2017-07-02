@@ -1,0 +1,33 @@
+$footer-height: 40px;
+
+.footer {
+  margin-top: 1em;
+  width: 100%;
+  line-height: 20px;
+  background-color: $yshi-green; 
+  color: $yshi-white;
+  border-top: 1px solid $yshi-bold-black; 
+  border-bottom: 1px solid $yshi-bold-black; 
+  position: absolute;
+  bottom: 0;
+  height: $footer-height; 
+  font-size: small;
+}
+
+.footer p {
+  margin-top: 5px;
+}
+
+.footer ul.nav {
+  height: 20px;
+}
+
+.footer a {
+  color: $yshi-white;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+}
